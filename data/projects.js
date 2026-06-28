@@ -111,5 +111,14 @@ const projects = [
     description: "Ohlédnutí za prvním rokem Designu informačních služeb — jak do sebe začaly zapadat sociologie, byznys a design, co přinesla virtuální realita i hackathon, vznik spolku Jiná mysl a proč mi začíná být teskno, že se blížím k polovině studia.",
     image: "images/reflexe-foto.jpg",
     link: "reflexe-prvni-rok.html"
+  },
+  {
+    year: 1,
+    type: "psani",
+    title: "Vibecoding: od terminálu k vlastnímu webu",
+    category: "Reflexe · Studijní seminář II",
+    description: "Reflexe Studijního semináře II, kde jsem se učila vibecoding v Claude Code. Praktickým projektem se stalo přímo tohle portfolio — od první nejistoty v terminálu po samostatnou práci a přesah do mé praxe.",
+    image: "images/seminar-cover.svg",
+    link: "reflexe-studijni-seminar.html"
   }
 ];

@@ -1,0 +1,19 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Terminál – vibecoding">
+  <rect width="800" height="600" fill="#faf8f3"/>
+  <!-- okno terminálu -->
+  <rect x="130" y="120" width="540" height="360" rx="16" fill="#161616"/>
+  <circle cx="165" cy="156" r="8" fill="#eaff00"/>
+  <circle cx="193" cy="156" r="8" fill="#5a5a5a"/>
+  <circle cx="221" cy="156" r="8" fill="#5a5a5a"/>
+  <line x1="130" y1="186" x2="670" y2="186" stroke="#2e2e2e" stroke-width="1.5"/>
+  <!-- prompt -->
+  <text x="163" y="248" font-family="ui-monospace, Menlo, monospace" font-size="26" fill="#eaff00">$</text>
+  <text x="192" y="248" font-family="ui-monospace, Menlo, monospace" font-size="26" fill="#f3f3f1">claude</text>
+  <rect x="320" y="226" width="15" height="27" fill="#eaff00"/>
+  <!-- simulované řádky výstupu -->
+  <rect x="163" y="298" width="380" height="12" rx="6" fill="#3a3a3a"/>
+  <rect x="163" y="328" width="300" height="12" rx="6" fill="#3a3a3a"/>
+  <rect x="163" y="358" width="430" height="12" rx="6" fill="#eaff00"/>
+  <rect x="163" y="388" width="250" height="12" rx="6" fill="#3a3a3a"/>
+  <rect x="163" y="418" width="340" height="12" rx="6" fill="#3a3a3a"/>
+</svg>

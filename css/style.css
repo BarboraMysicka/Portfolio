@@ -130,6 +130,29 @@ h1, h2, h3 {
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20240%2070'%20preserveAspectRatio='none'%3E%3Cpath%20d='M8%2012%20C70%204%20170%208%20232%2010%20C236%2030%20234%2048%20230%2060%20C160%2066%2080%2063%2010%2058%20C5%2040%206%2026%208%2012%20Z'%20fill='none'%20stroke='%23f3f3f1'%20stroke-width='2.5'/%3E%3C/svg%3E");
 }
 
+/* =========================================================================
+   TMAVÝ REŽIM – čitelnost žlutých zvýraznění
+   V tmavém režimu je text světlý, takže žlutá „za písmeny" snižovala
+   kontrast (spodek písmen splýval). Řešení:
+   - .hl a .btn__txt: místo podtržení PLNÝ žlutý blok s tmavým textem
+     (stejně čitelné jako blok „designem." v úvodu)
+   - .hl-title: ruční podtržení se posune POD text (čára, ne přeškrtnutí)
+   Světlý režim zůstává beze změny.
+   ========================================================================= */
+:root[data-theme="dark"] .hl,
+:root[data-theme="dark"] .btn__txt {
+  background: var(--accent);
+  color: #161616;
+  padding: 0 0.18em;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+:root[data-theme="dark"] .hl-title {
+  background-position: left 100%;
+  background-size: 102% 0.32em;
+}
+
 /* přepínač světlý/tmavý režim v záhlaví */
 .theme-toggle {
   background: none;
@@ -611,3 +634,17 @@ a:focus:not(:focus-visible) { outline: none; }
 .article__back a { font-weight: 700; border-bottom: 2px solid var(--accent); }
 /* úvodní fotka v článku */
 .article__lead { width: 100%; margin: 0 0 clamp(2rem, 4vw, 3rem); }
+
+/* nadpisy sekcí a otázky uvnitř delšího článku (reflexe) */
+.article__body h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  margin: 3rem 0 1rem;
+}
+.article__body .article__q {
+  font-style: italic;
+  font-weight: 600;
+  opacity: 0.6;
+  margin: 1.8rem 0 0.4rem;
+}
