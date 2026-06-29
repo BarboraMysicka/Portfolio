@@ -83,7 +83,16 @@ const projects = [
     description: "Datová infografika pro předmět Data pro design služeb. Mapuje, proč v Česku zůstávají statisíce volných pracovních míst neobsazené — strukturální nesoulad mezi nabídkou a poptávkou, pět nejhůře obsaditelných profesí a kdo je vlastně bez práce.",
     image: "images/infografika-cover.jpg",
     imagePos: "top",
-    link: "soubory/infografika.pdf"
+    link: "reflexe-infografika.html"
+  },
+  {
+    year: 1,
+    type: "data",
+    title: "Bezpečí ve veřejné službě kolem dítěte a rodiny",
+    category: "Kvalitativní výzkum pro design služeb",
+    description: "Týmová výzkumná zpráva (pět studentek, 15 hloubkových rozhovorů) o bezpečném rozhodování o dětech v síti OSPOD a návazných služeb. Z dat vznikla mapa bezpečí, integrační matice a pět bezpečnostních vzorců — podklad pro navazující designovou fázi. Na konci je i má osobní reflexe.",
+    image: "images/mapa-bezpeci.jpg",
+    link: "vyzkumna-zprava-ospod.html"
   },
   {
     year: 1,
