@@ -1,133 +1,146 @@
 /* =========================================================================
-   DATA PROJEKTŮ
+   DATA PROJEKTŮ  (jediné místo, kam píšeš obsah projektů)
    =========================================================================
-   Tohle je JEDINÉ místo, kam doplňuješ své projekty.
    Každý projekt je jeden objekt { ... } v poli níže.
 
-   Jak přidat nový projekt:
-   1) Zkopíruj jeden celý blok od "{" po "}," (včetně čárky na konci).
-   2) Vlož ho do pole a uprav hodnoty.
-   3) Ulož soubor a obnov stránku v prohlížeči (F5).
+   Jak přidat / upravit projekt:
+   1) Zkopíruj jeden celý blok od "{" po "}," a uprav hodnoty.
+   2) Ulož soubor.
+   3) Přegeneruj karty do index.html příkazem:  node build-projekty.js
+      (tím se obsah propíše do statického HTML – kvůli vyhledávačům,
+       náhledu na LinkedInu a tomu, aby projekty fungovaly i bez JavaScriptu).
 
-   Význam jednotlivých polí:
-   - type        ... DO KTERÉ SKUPINY projekt patří. Možnosti:
-                     "koncepty" = Případové studie & koncepty
-                     "data"     = Data & výzkum
-                     "psani"    = Psaní & reflexe
-                     "kurzy"    = Kurzy & experimenty
-                     (názvy a pořadí skupin se nastavují v js/main.js – SKUPINY)
-   - year        ... ročník studia (zobrazí se jako štítek na kartě)
-   - title       ... název projektu (text v uvozovkách)
-   - category    ... předmět nebo typ práce (např. "Data pro design služeb")
-   - description ... krátký popis projektu
-   - image       ... cesta k náhledovému obrázku.
-                     Vlastní obrázky dávej do složky "images/" a piš sem
-                     např. "images/muj-projekt.jpg"
-   - imagePos    ... NEPOVINNÉ. Výřez obrázku, např. "top" (ukáže horní část).
-   - link        ... NEPOVINNÉ. Odkaz na detail/PDF/web projektu.
-                     Když odkaz nemáš, smaž celý řádek "link" nebo nech "".
+   Význam polí:
+   - id         ... krátký jedinečný identifikátor (jen malá písmena a pomlčky)
+   - nazev      ... název projektu
+   - popis      ... 1–3 věty
+   - obrazek    ... cesta k náhledovému obrázku (složka images/)
+   - obrazekPos ... NEPOVINNÉ. Výřez obrázku, např. "top" (ukáže horní část)
+   - odkaz      ... NEPOVINNÉ. Odkaz na detail/web/PDF. Když není, nech ""
+   - semestr    ... 1 nebo 2
+   - oblast     ... jedna z: "vyzkum" | "data" | "casestudy" | "psani" | "kurzy"
+   - stitky     ... pole dovedností, např. ["service design", "výzkum"]
+
+   Pořadí v poli = pořadí v rámci pásem (nejsilnější/„pracovní" dej první).
    ========================================================================= */
 
-const projects = [
+const projekty = [
   {
-    year: 1,
-    type: "koncepty",
-    title: "Psychologické bezpečí a práce s chybami v OSPOD",
-    category: "Praxe I · Hackathon",
-    description: "Dvoudenní hackathon zaměřený na psychologické bezpečí a práci s chybami v OSPOD. V sedmičlenném týmu jsme navrhli proces systémové změny, aby rozhodování v krizích bylo jistější, transparentnější a v nejlepším zájmu dítěte.",
-    image: "images/ospod-foto.jpg",
-    link: "soubory/praxe.pdf"
+    id: "mapa-bezpeci",
+    nazev: "Mapa bezpečí ve veřejné službě",
+    popis: "Týmový kvalitativní výzkum (5 studentek, 15 hloubkových rozhovorů) o bezpečném rozhodování o dětech v síti OSPOD. Spoluvedla jsem rozhovory, tagovala v Condensu a podílela se na syntéze. Výstupem je mapa bezpečí, čtyři vrstvy bezpečí, integrační matice a designová výzva.",
+    obrazek: "images/mapa-bezpeci.jpg",
+    odkaz: "vyzkumna-zprava-ospod.html",
+    semestr: 2,
+    oblast: "vyzkum",
+    stitky: ["kvalitativní výzkum", "service design", "týmová práce"],
   },
   {
-    year: 1,
-    type: "data",
-    title: "Datový deník",
-    category: "Data pro design služeb",
-    description: "Semestrální deník v rámci předmětu Data pro design služeb. Čtyři reflektované zápisky o grafech a vizualizacích, na které jsem narazila — od příspěvku na X přes vlakovou obrazovku a interaktivní storytelling The Pudding až po slide z konference o longevity.",
-    image: "images/datovy-denik-foto.jpg",
-    link: "https://barbora-design-journey.lovable.app/datovy-denik"
+    id: "ospod-hackathon",
+    nazev: "OSPOD: psychologické bezpečí a práce s chybami",
+    popis: "Dvoudenní hackathon (Praxe I) o tom, jak udělat rozhodování v krizích jistější, transparentnější a v nejlepším zájmu dítěte. V sedmičlenném týmu jsme navrhli proces systémové změny.",
+    obrazek: "images/ospod-foto.jpg",
+    odkaz: "soubory/praxe.pdf",
+    semestr: 1,
+    oblast: "vyzkum",
+    stitky: ["facilitace", "systémový design", "týmová práce"],
   },
   {
-    year: 1,
-    type: "psani",
-    title: "Jak navrhnout zážitek, který otevírá tabu",
-    category: "Case study obnaŽENY · Medium",
-    description: "Případová studie projektu obnaŽENA — multižánrového divadelního zážitku, který skrze vzdušnou akrobacii, tanec, zpěv a hudbu normalizuje téma ženského menstruačního cyklu. Zkoumám designový proces i dlouhodobý společenský dopad tohoto přístupu k destigmatizaci tabu.",
-    image: "images/case-study-medium.jpg",
-    link: "https://medium.com/design-kisk/jak-navrhnout-z%C3%A1%C5%BEitek-kter%C3%BD-otev%C3%ADr%C3%A1-tabu-case-study-obna%C5%BEeny-e3a4ea513f84"
+    id: "cesko-hleda-marne",
+    nazev: "Česko hledá. Marně.",
+    popis: "Datová infografika o tom, proč v Česku zůstávají statisíce volných míst neobsazené navzdory rekordně nízké nezaměstnanosti. Mapuje strukturální nesoulad nabídky a poptávky a pět nejhůř obsaditelných profesí.",
+    obrazek: "images/infografika-cover.jpg",
+    obrazekPos: "top",
+    odkaz: "reflexe-infografika.html",
+    semestr: 2,
+    oblast: "data",
+    stitky: ["data", "datová vizualizace", "infografika"],
   },
   {
-    year: 1,
-    type: "psani",
-    title: "Figma jako základ, AI jako akcelerátor",
-    category: "Rozhovor s Jakubem Karlecem · Medium",
-    description: "Rozhovor s Jakubem Karlecem, spoluzakladatelem designového studia 2FRESH, o tom, jak se za 25 let proměnil obor digitálního designu, s jakými výzvami se dnes potýkají junioři a jak AI mění designérskou práci — vedle nezbytných soft skills jako spolehlivost a komunikace s klientem.",
-    image: "images/rozhovor-medium.jpg",
-    link: "https://medium.com/design-kisk/figma-jako-z%C3%A1klad-ai-jako-akceler%C3%A1tor-jak-usp%C4%9Bt-v-ux-a-produktov%C3%A9m-designu-jako-junior-7871fff44180"
+    id: "datovy-denik",
+    nazev: "Datový deník",
+    popis: "Semestrální deník reflektovaných zápisků o grafech a vizualizacích, na které jsem narazila, od příspěvku na X přes interaktivní storytelling The Pudding až po slide z konference.",
+    obrazek: "images/datovy-denik-foto.jpg",
+    odkaz: "https://barbora-design-journey.lovable.app/datovy-denik",
+    semestr: 2,
+    oblast: "data",
+    stitky: ["data", "vizuální gramotnost", "reflexe"],
   },
   {
-    year: 1,
-    type: "koncepty",
-    title: "Comeback bez mapy",
-    category: "E-poster · Inkluzivní design",
-    description: "V rámci předmětu Inkluzivní design bylo cílem odstranit bariéru ze svého pracoviště nebo okolí. Pro svou práci jsem si vybrala návrat z rodičovské dovolené v remote firmě — situaci, kdy se vztahy, kontext i nepsaná pravidla mezitím tiše posunou. Jako řešení navrhuju „buddy“: jednoho kolegu, který vracejícího se provede prvními 6–8 týdny. Výstupem je e-poster s emoční křivkou prvních 8 týdnů, analýzou bariér a konceptem k otestování.",
-    image: "images/comeback-cover.jpg",
-    imagePos: "top",   /* karta ukáže horní část posteru (titul), ne střed */
-    link: "images/comeback-poster.jpg"
+    id: "comeback-bez-mapy",
+    nazev: "Comeback bez mapy",
+    popis: "Návrat z rodičovské do remote firmy, kde se mezitím všechno tiše posunulo. Z autoreflexe a tří rozhovorů jsem navrhla řešení „buddy“. Výstupem je e-poster s emoční křivkou prvních 8 týdnů a konceptem k otestování.",
+    obrazek: "images/comeback-cover.jpg",
+    obrazekPos: "top",
+    odkaz: "images/comeback-poster.jpg",
+    semestr: 2,
+    oblast: "casestudy",
+    stitky: ["inkluzivní design", "service design", "vizualizace"],
   },
   {
-    year: 1,
-    type: "data",
-    title: "Česko hledá. Marně.",
-    category: "Data pro design služeb · Infografika",
-    description: "Datová infografika pro předmět Data pro design služeb. Mapuje, proč v Česku zůstávají statisíce volných pracovních míst neobsazené — strukturální nesoulad mezi nabídkou a poptávkou, pět nejhůře obsaditelných profesí a kdo je vlastně bez práce.",
-    image: "images/infografika-cover.jpg",
-    imagePos: "top",
-    link: "reflexe-infografika.html"
+    id: "obnazena",
+    nazev: "obnaŽENA: jak navrhnout zážitek, který otevírá tabu",
+    popis: "Případová studie multižánrového divadelního zážitku, který přes vzdušnou akrobacii, tanec a hudbu normalizuje téma menstruačního cyklu. Zkoumám designový proces i jeho společenský dopad.",
+    obrazek: "images/case-study-medium.jpg",
+    odkaz: "https://medium.com/design-kisk/jak-navrhnout-z%C3%A1%C5%BEitek-kter%C3%BD-otev%C3%ADr%C3%A1-tabu-case-study-obna%C5%BEeny-e3a4ea513f84",
+    semestr: 1,
+    oblast: "casestudy",
+    stitky: ["service design", "case study", "destigmatizace"],
   },
   {
-    year: 1,
-    type: "data",
-    title: "Bezpečí ve veřejné službě kolem dítěte a rodiny",
-    category: "Kvalitativní výzkum pro design služeb",
-    description: "Týmová výzkumná zpráva (pět studentek, 15 hloubkových rozhovorů) o bezpečném rozhodování o dětech v síti OSPOD a návazných služeb. Z dat vznikla mapa bezpečí, integrační matice a pět bezpečnostních vzorců — podklad pro navazující designovou fázi. Na konci je i má osobní reflexe.",
-    image: "images/mapa-bezpeci.jpg",
-    link: "vyzkumna-zprava-ospod.html"
+    id: "vibecoding",
+    nazev: "Vibecoding: od terminálu k vlastnímu webu",
+    popis: "Reflexe Studijního semináře II, kde jsem se učila vibecoding v Claude Code. Praktickým projektem se stalo přímo tohle portfolio, od první nejistoty v terminálu po samostatnou práci a přesah do praxe.",
+    obrazek: "images/seminar-cover.svg",
+    odkaz: "reflexe-studijni-seminar.html",
+    semestr: 2,
+    oblast: "psani",
+    stitky: ["vibecoding", "reflexe", "web"],
   },
   {
-    year: 1,
-    type: "kurzy",
-    title: "Elements of AI",
-    category: "Online kurz · MOOC.fi",
-    description: "Mezinárodní online kurz Elements of AI (University of Helsinki & MinnaLearn). Úvod do umělé inteligence — co AI je a není, jak funguje strojové učení a neuronové sítě a jaké má AI reálné i etické dopady. Zakončeno certifikátem.",
-    image: "images/elements-ai.svg",
-    link: "images/certifikat-elements-of-ai.jpg"
+    id: "prvni-rok",
+    nazev: "První rok studia: když do sebe věci začnou zapadat",
+    popis: "Ohlédnutí za prvním rokem Designu informačních služeb, jak do sebe začaly zapadat sociologie, byznys a design, co přinesla virtuální realita i hackathon a proč začínám být blíž k vlastnímu směru.",
+    obrazek: "images/reflexe-foto.jpg",
+    odkaz: "reflexe-prvni-rok.html",
+    semestr: 2,
+    oblast: "psani",
+    stitky: ["reflexe", "studijní cesta"],
   },
   {
-    year: 1,
-    type: "kurzy",
-    title: "Když se z technologie stane setkání",
-    category: "Virtuální realita · VRChat (tutorská lekce)",
-    description: "Se spolužačkou jsme v rámci předmětu Virtuální realita připravily a odtutorovaly vlastní lekci ve VRChatu — založily jsme místnost a provedly spolužáky celou hodinou (kostky, kreslení, hudba) v dev módu. Nejvíc mě překvapilo, jak moc je VR o lidech: stačily jednoduché avatary, hlas a společná aktivita a vzniklo skutečné setkání, ne ukázka nástroje. Zažila jsem ale i nepříjemnou stránku, která mi připomněla, jak zásadní je ve virtuálních prostorech myslet na soukromí, bezpečí a osobní hranice.",
-    image: "images/vrchat.jpg",
-    link: ""
+    id: "figma-ai-rozhovor",
+    nazev: "Figma jako základ, AI jako akcelerátor",
+    popis: "Rozhovor s Jakubem Karlecem (2FRESH) o tom, jak se za 25 let proměnil digitální design, s jakými výzvami se potýkají junioři a jak práci mění AI. Publikováno na Mediu.",
+    obrazek: "images/rozhovor-medium.jpg",
+    odkaz: "https://medium.com/design-kisk/figma-jako-z%C3%A1klad-ai-jako-akceler%C3%A1tor-jak-usp%C4%9Bt-v-ux-a-produktov%C3%A9m-designu-jako-junior-7871fff44180",
+    semestr: 1,
+    oblast: "psani",
+    stitky: ["rozhovor", "výzkumný rozhovor", "psaní"],
   },
   {
-    year: 1,
-    type: "psani",
-    title: "První rok studia: když do sebe věci začnou zapadat",
-    category: "Reflexe · 1. ročník",
-    description: "Ohlédnutí za prvním rokem Designu informačních služeb — jak do sebe začaly zapadat sociologie, byznys a design, co přinesla virtuální realita i hackathon, vznik spolku Jiná mysl a proč mi začíná být teskno, že se blížím k polovině studia.",
-    image: "images/reflexe-foto.jpg",
-    link: "reflexe-prvni-rok.html"
+    id: "elements-of-ai",
+    nazev: "Elements of AI",
+    popis: "Mezinárodní online kurz (University of Helsinki & MinnaLearn). Úvod do umělé inteligence: co AI je a není, jak funguje strojové učení a jaké má reálné i etické dopady. Zakončeno certifikátem.",
+    obrazek: "images/elements-ai.svg",
+    odkaz: "images/certifikat-elements-of-ai.jpg",
+    semestr: 1,
+    oblast: "kurzy",
+    stitky: ["AI", "online kurz", "certifikát"],
   },
   {
-    year: 1,
-    type: "psani",
-    title: "Vibecoding: od terminálu k vlastnímu webu",
-    category: "Reflexe · Studijní seminář II",
-    description: "Reflexe Studijního semináře II, kde jsem se učila vibecoding v Claude Code. Praktickým projektem se stalo přímo tohle portfolio — od první nejistoty v terminálu po samostatnou práci a přesah do mé praxe.",
-    image: "images/seminar-cover.svg",
-    link: "reflexe-studijni-seminar.html"
-  }
+    id: "vrchat-setkani",
+    nazev: "Když se z technologie stane setkání",
+    popis: "V předmětu Virtuální realita jsme se spolužačkou připravily a odtutorovaly vlastní lekci ve VRChatu. Reflexe o tom, jak moc je VR o lidech, i o soukromí a hranicích ve virtuálních prostorech.",
+    obrazek: "images/vrchat.jpg",
+    odkaz: "",
+    semestr: 2,
+    oblast: "kurzy",
+    stitky: ["virtuální realita", "facilitace", "experiment"],
+  },
 ];
+
+/* Pro generátor (node build-projekty.js). V prohlížeči se tento soubor
+   už nenačítá – karty jsou natvrdo v index.html. */
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = projekty;
+}

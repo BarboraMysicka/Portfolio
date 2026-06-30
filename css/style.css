@@ -462,6 +462,47 @@ h1, h2, h3 {
 .card { position: relative; }
 .card__link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 
+/* Přepínač pohledů (Podle studia / Podle oblastí) */
+.view-toggle { display: inline-flex; gap: 0.4rem; margin-bottom: 3rem; flex-wrap: wrap; }
+.view-toggle[hidden] { display: none; }
+.view-toggle__btn {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.55rem 1.15rem;
+  border: 1.5px solid var(--text);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.view-toggle__btn:hover { background: var(--line); }
+.view-toggle__btn.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #161616;
+}
+
+/* Štítek semestru na kartě (malý žlutý) */
+.card__sem { background: var(--accent); color: #161616; padding: 0.12em 0.6em; border-radius: 3px; }
+
+/* Štítky dovedností na kartě */
+.card__tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+.card__tags .tag {
+  font-size: 0.74rem;
+  padding: 0.25em 0.7em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  opacity: 0.85;
+}
+
 /* =========================================================================
    4. CV / VZDĚLÁNÍ
    ========================================================================= */

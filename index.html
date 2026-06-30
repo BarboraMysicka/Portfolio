@@ -20,9 +20,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://barboramysickova.cz/" />
   <meta property="og:title" content="Barbora Myšičková — portfolio" />
-  <meta property="og:description" content="Studentka service designu na pomezí byznysu a designu služeb. Projekty, výzkum a case studies." />
-  <meta property="og:image" content="https://barboramysickova.cz/images/portret-headline.jpg" />
+  <meta property="og:description" content="Studentka na pomezí byznysu a designu služeb. Výzkum, data a case studies." />
+  <meta property="og:image" content="https://barboramysickova.cz/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Barbora Myšičková — portfolio" />
+  <meta name="twitter:description" content="Studentka na pomezí byznysu a designu služeb. Výzkum, data a case studies." />
+  <meta name="twitter:image" content="https://barboramysickova.cz/images/og-image.png" />
 
   <!-- Google Fonts: Bricolage Grotesque (nadpisy) + Inter (běžný text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -174,11 +179,143 @@
     </section>
 
     <!-- ===================== 3. PROJEKTY ===================== -->
-    <!-- POZOR: karty projektů se sem vkládají AUTOMATICKY z data/projects.js.
-         Ručně tu nic needituj – jen kontejner, do kterého JS doplní obsah. -->
+    <!-- POZOR: karty se generují z data/projects.js příkazem
+         „node build-projekty.js" do bloku mezi značky PROJEKTY:START/END.
+         Ten blok needituj ručně. Přepínač pohledů řeší js/main.js. -->
     <section id="projekty" class="projects">
       <h2 class="section-title reveal">Projekty</h2>
-      <div id="projects-root"></div>
+
+      <!-- Přepínač pohledů. Bez JS je skrytý (atribut hidden) – projekty se
+           pak ukážou seskupené podle studia. JS přepínač odkryje a zfunkční. -->
+      <div class="view-toggle" role="group" aria-label="Jak zobrazit projekty" hidden>
+        <button type="button" class="view-toggle__btn is-active" data-rezim="studio" aria-pressed="true">Podle studia</button>
+        <button type="button" class="view-toggle__btn" data-rezim="oblast" aria-pressed="false">Podle oblastí</button>
+      </div>
+
+      <div id="projects-root">
+    <!-- PROJEKTY:START -->
+    <!-- Pozor: tento blok generuje build-projekty.js z data/projects.js. Needituj ručně. -->
+  <div class="year-block">
+    <h3 class="year-title">1. semestr</h3>
+    <div class="cards">
+    <article class="card" data-id="ospod-hackathon" data-poradi="1" data-semestr="1" data-oblast="vyzkum">
+      <div class="card__media">
+        <img src="images/ospod-foto.jpg" alt="OSPOD: psychologické bezpečí a práce s chybami" loading="lazy" />
+      </div>
+      <h3 class="card__title">OSPOD: psychologické bezpečí a práce s chybami</h3>
+      <p class="card__meta"><span class="card__sem">1. semestr</span></p>
+      <ul class="card__tags"><li class="tag">facilitace</li><li class="tag">systémový design</li><li class="tag">týmová práce</li></ul>
+      <p class="card__desc">Dvoudenní hackathon (Praxe I) o tom, jak udělat rozhodování v krizích jistější, transparentnější a v nejlepším zájmu dítěte. V sedmičlenném týmu jsme navrhli proces systémové změny.</p>
+      <a class="card__link" href="soubory/praxe.pdf" target="_blank" rel="noopener">Více →</a>
+    </article>
+    <article class="card" data-id="obnazena" data-poradi="5" data-semestr="1" data-oblast="casestudy">
+      <div class="card__media">
+        <img src="images/case-study-medium.jpg" alt="obnaŽENA: jak navrhnout zážitek, který otevírá tabu" loading="lazy" />
+      </div>
+      <h3 class="card__title">obnaŽENA: jak navrhnout zážitek, který otevírá tabu</h3>
+      <p class="card__meta"><span class="card__sem">1. semestr</span></p>
+      <ul class="card__tags"><li class="tag">service design</li><li class="tag">case study</li><li class="tag">destigmatizace</li></ul>
+      <p class="card__desc">Případová studie multižánrového divadelního zážitku, který přes vzdušnou akrobacii, tanec a hudbu normalizuje téma menstruačního cyklu. Zkoumám designový proces i jeho společenský dopad.</p>
+      <a class="card__link" href="https://medium.com/design-kisk/jak-navrhnout-z%C3%A1%C5%BEitek-kter%C3%BD-otev%C3%ADr%C3%A1-tabu-case-study-obna%C5%BEeny-e3a4ea513f84" target="_blank" rel="noopener">Více →</a>
+    </article>
+    <article class="card" data-id="figma-ai-rozhovor" data-poradi="8" data-semestr="1" data-oblast="psani">
+      <div class="card__media">
+        <img src="images/rozhovor-medium.jpg" alt="Figma jako základ, AI jako akcelerátor" loading="lazy" />
+      </div>
+      <h3 class="card__title">Figma jako základ, AI jako akcelerátor</h3>
+      <p class="card__meta"><span class="card__sem">1. semestr</span></p>
+      <ul class="card__tags"><li class="tag">rozhovor</li><li class="tag">výzkumný rozhovor</li><li class="tag">psaní</li></ul>
+      <p class="card__desc">Rozhovor s Jakubem Karlecem (2FRESH) o tom, jak se za 25 let proměnil digitální design, s jakými výzvami se potýkají junioři a jak práci mění AI. Publikováno na Mediu.</p>
+      <a class="card__link" href="https://medium.com/design-kisk/figma-jako-z%C3%A1klad-ai-jako-akceler%C3%A1tor-jak-usp%C4%9Bt-v-ux-a-produktov%C3%A9m-designu-jako-junior-7871fff44180" target="_blank" rel="noopener">Více →</a>
+    </article>
+    <article class="card" data-id="elements-of-ai" data-poradi="9" data-semestr="1" data-oblast="kurzy">
+      <div class="card__media">
+        <img src="images/elements-ai.svg" alt="Elements of AI" loading="lazy" />
+      </div>
+      <h3 class="card__title">Elements of AI</h3>
+      <p class="card__meta"><span class="card__sem">1. semestr</span></p>
+      <ul class="card__tags"><li class="tag">AI</li><li class="tag">online kurz</li><li class="tag">certifikát</li></ul>
+      <p class="card__desc">Mezinárodní online kurz (University of Helsinki &amp; MinnaLearn). Úvod do umělé inteligence: co AI je a není, jak funguje strojové učení a jaké má reálné i etické dopady. Zakončeno certifikátem.</p>
+      <a class="card__link" href="images/certifikat-elements-of-ai.jpg" target="_blank" rel="noopener">Více →</a>
+    </article>
+    </div>
+  </div>
+  <div class="year-block">
+    <h3 class="year-title">2. semestr</h3>
+    <div class="cards">
+    <article class="card" data-id="mapa-bezpeci" data-poradi="0" data-semestr="2" data-oblast="vyzkum">
+      <div class="card__media">
+        <img src="images/mapa-bezpeci.jpg" alt="Mapa bezpečí ve veřejné službě" loading="lazy" />
+      </div>
+      <h3 class="card__title">Mapa bezpečí ve veřejné službě</h3>
+      <p class="card__meta"><span class="card__sem">2. semestr</span></p>
+      <ul class="card__tags"><li class="tag">kvalitativní výzkum</li><li class="tag">service design</li><li class="tag">týmová práce</li></ul>
+      <p class="card__desc">Týmový kvalitativní výzkum (5 studentek, 15 hloubkových rozhovorů) o bezpečném rozhodování o dětech v síti OSPOD. Spoluvedla jsem rozhovory, tagovala v Condensu a podílela se na syntéze. Výstupem je mapa bezpečí, čtyři vrstvy bezpečí, integrační matice a designová výzva.</p>
+      <a class="card__link" href="vyzkumna-zprava-ospod.html">Více →</a>
+    </article>
+    <article class="card" data-id="cesko-hleda-marne" data-poradi="2" data-semestr="2" data-oblast="data">
+      <div class="card__media">
+        <img src="images/infografika-cover.jpg" alt="Česko hledá. Marně." loading="lazy" style="object-position: top;" />
+      </div>
+      <h3 class="card__title">Česko hledá. Marně.</h3>
+      <p class="card__meta"><span class="card__sem">2. semestr</span></p>
+      <ul class="card__tags"><li class="tag">data</li><li class="tag">datová vizualizace</li><li class="tag">infografika</li></ul>
+      <p class="card__desc">Datová infografika o tom, proč v Česku zůstávají statisíce volných míst neobsazené navzdory rekordně nízké nezaměstnanosti. Mapuje strukturální nesoulad nabídky a poptávky a pět nejhůř obsaditelných profesí.</p>
+      <a class="card__link" href="reflexe-infografika.html">Více →</a>
+    </article>
+    <article class="card" data-id="datovy-denik" data-poradi="3" data-semestr="2" data-oblast="data">
+      <div class="card__media">
+        <img src="images/datovy-denik-foto.jpg" alt="Datový deník" loading="lazy" />
+      </div>
+      <h3 class="card__title">Datový deník</h3>
+      <p class="card__meta"><span class="card__sem">2. semestr</span></p>
+      <ul class="card__tags"><li class="tag">data</li><li class="tag">vizuální gramotnost</li><li class="tag">reflexe</li></ul>
+      <p class="card__desc">Semestrální deník reflektovaných zápisků o grafech a vizualizacích, na které jsem narazila, od příspěvku na X přes interaktivní storytelling The Pudding až po slide z konference.</p>
+      <a class="card__link" href="https://barbora-design-journey.lovable.app/datovy-denik" target="_blank" rel="noopener">Více →</a>
+    </article>
+    <article class="card" data-id="comeback-bez-mapy" data-poradi="4" data-semestr="2" data-oblast="casestudy">
+      <div class="card__media">
+        <img src="images/comeback-cover.jpg" alt="Comeback bez mapy" loading="lazy" style="object-position: top;" />
+      </div>
+      <h3 class="card__title">Comeback bez mapy</h3>
+      <p class="card__meta"><span class="card__sem">2. semestr</span></p>
+      <ul class="card__tags"><li class="tag">inkluzivní design</li><li class="tag">service design</li><li class="tag">vizualizace</li></ul>
+      <p class="card__desc">Návrat z rodičovské do remote firmy, kde se mezitím všechno tiše posunulo. Z autoreflexe a tří rozhovorů jsem navrhla řešení „buddy“. Výstupem je e-poster s emoční křivkou prvních 8 týdnů a konceptem k otestování.</p>
+      <a class="card__link" href="images/comeback-poster.jpg" target="_blank" rel="noopener">Více →</a>
+    </article>
+    <article class="card" data-id="vibecoding" data-poradi="6" data-semestr="2" data-oblast="psani">
+      <div class="card__media">
+        <img src="images/seminar-cover.svg" alt="Vibecoding: od terminálu k vlastnímu webu" loading="lazy" />
+      </div>
+      <h3 class="card__title">Vibecoding: od terminálu k vlastnímu webu</h3>
+      <p class="card__meta"><span class="card__sem">2. semestr</span></p>
+      <ul class="card__tags"><li class="tag">vibecoding</li><li class="tag">reflexe</li><li class="tag">web</li></ul>
+      <p class="card__desc">Reflexe Studijního semináře II, kde jsem se učila vibecoding v Claude Code. Praktickým projektem se stalo přímo tohle portfolio, od první nejistoty v terminálu po samostatnou práci a přesah do praxe.</p>
+      <a class="card__link" href="reflexe-studijni-seminar.html">Více →</a>
+    </article>
+    <article class="card" data-id="prvni-rok" data-poradi="7" data-semestr="2" data-oblast="psani">
+      <div class="card__media">
+        <img src="images/reflexe-foto.jpg" alt="První rok studia: když do sebe věci začnou zapadat" loading="lazy" />
+      </div>
+      <h3 class="card__title">První rok studia: když do sebe věci začnou zapadat</h3>
+      <p class="card__meta"><span class="card__sem">2. semestr</span></p>
+      <ul class="card__tags"><li class="tag">reflexe</li><li class="tag">studijní cesta</li></ul>
+      <p class="card__desc">Ohlédnutí za prvním rokem Designu informačních služeb, jak do sebe začaly zapadat sociologie, byznys a design, co přinesla virtuální realita i hackathon a proč začínám být blíž k vlastnímu směru.</p>
+      <a class="card__link" href="reflexe-prvni-rok.html">Více →</a>
+    </article>
+    <article class="card" data-id="vrchat-setkani" data-poradi="10" data-semestr="2" data-oblast="kurzy">
+      <div class="card__media">
+        <img src="images/vrchat.jpg" alt="Když se z technologie stane setkání" loading="lazy" />
+      </div>
+      <h3 class="card__title">Když se z technologie stane setkání</h3>
+      <p class="card__meta"><span class="card__sem">2. semestr</span></p>
+      <ul class="card__tags"><li class="tag">virtuální realita</li><li class="tag">facilitace</li><li class="tag">experiment</li></ul>
+      <p class="card__desc">V předmětu Virtuální realita jsme se spolužačkou připravily a odtutorovaly vlastní lekci ve VRChatu. Reflexe o tom, jak moc je VR o lidech, i o soukromí a hranicích ve virtuálních prostorech.</p>
+    </article>
+    </div>
+  </div>
+    <!-- PROJEKTY:END -->
+      </div>
     </section>
 
     <!-- ===================== KONTAKT ===================== -->
@@ -190,7 +327,7 @@
           <strong>Napište mi</strong> — ráda se potkám.
         </p>
         <!-- Změň e-mail na obou místech (v textu i v href="mailto:...") -->
-        <a href="mailto:mysbaru@gmail.com" class="contact__email">mysbaru@gmail.com</a>
+        <a href="mailto:ahoj@barboramysickova.cz" class="contact__email">ahoj@barboramysickova.cz</a>
 
         <div class="contact__links">
           <a href="https://www.linkedin.com/in/barbora-my%C5%A1i%C4%8Dkov%C3%A1/" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -207,8 +344,8 @@
     <p>© 2026 Barbora Myšičková</p>
   </footer>
 
-  <!-- Skripty: nejdřív data, pak logika stránky -->
-  <script src="data/projects.js"></script>
+  <!-- Logika stránky. Karty projektů jsou už v HTML výše (statické),
+       data/projects.js se v prohlížeči nenačítá – slouží jen generátoru. -->
   <script src="js/main.js"></script>
 </body>
 </html>

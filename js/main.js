@@ -10,75 +10,88 @@
    kde každý projekt má pole type ("koncepty" / "data" / "psani" / "kurzy").
    ========================================================================= */
 
-/* SKUPINY projektů – pořadí v poli = pořadí na stránce.
-   - key   ... shoduje se s polem "type" u projektu v data/projects.js
-   - label ... nadpis skupiny zobrazený na stránce
-   Chceš novou skupinu? Přidej sem řádek a projektům dej odpovídající type.
-   Chceš jiný název/pořadí? Uprav label nebo pořadí řádků. */
-const SKUPINY = [
-  { key: "koncepty", label: "Případové studie & koncepty" },
-  { key: "data",     label: "Data & výzkum" },
-  { key: "psani",    label: "Psaní & reflexe" },
-  { key: "kurzy",    label: "Kurzy & experimenty" },
+/* Pásma pro pohled „Podle oblastí" – pořadí = pořadí na stránce. */
+const OBLASTI = [
+  { key: "vyzkum",    label: "Výzkum" },
+  { key: "data",      label: "Data" },
+  { key: "casestudy", label: "Case studies" },
+  { key: "psani",     label: "Psaní a publikované texty" },
+  { key: "kurzy",     label: "Kurzy & experimenty" },
 ];
 
 /* -------------------------------------------------------------------------
-   Vytvoření jedné karty projektu (vrací HTML element)
+   Projekty – dva pohledy + přepínač.
+   Karty jsou už v HTML (statické). JS si je jednou posbírá a při přepnutí
+   pohledu je jen PŘESKUPÍ (přesune stejné prvky), data se nenačítají znovu.
    ------------------------------------------------------------------------- */
-function vytvorKartu(projekt) {
-  const card = document.createElement("article");
-  card.className = "card reveal";
-
-  // Odkaz "Více" se zobrazí jen tehdy, když projekt nějaký odkaz má
-  const odkazHtml = projekt.link
-    ? `<a class="card__link" href="${projekt.link}" target="_blank" rel="noopener">Více →</a>`
-    : "";
-
-  // Volitelné: imagePos umožní zarovnat výřez obrázku (např. "top" u posteru)
-  const posStyle = projekt.imagePos ? ` style="object-position: ${projekt.imagePos};"` : "";
-
-  card.innerHTML = `
-    <div class="card__media">
-      <img src="${projekt.image}" alt="${projekt.title}" loading="lazy"${posStyle} />
-    </div>
-    <h4 class="card__title">${projekt.title}</h4>
-    <p class="card__meta">
-      <span class="card__year">${projekt.year}. ročník</span>
-      &nbsp; ${projekt.category}
-    </p>
-    <p class="card__desc">${projekt.description}</p>
-    ${odkazHtml}
-  `;
-  return card;
-}
-
-/* -------------------------------------------------------------------------
-   Vykreslení všech projektů rozdělených do tematických skupin (podle type)
-   ------------------------------------------------------------------------- */
-function vykresliProjekty() {
+function spustProjekty() {
   const root = document.getElementById("projects-root");
   if (!root) return;
 
-  SKUPINY.forEach((skupina) => {
-    // Vyber jen projekty dané skupiny
-    const projektySkupiny = projects.filter((p) => p.type === skupina.key);
+  // Posbírej existující karty ze statického HTML (jednou). Pořadí zachová
+  // pořadí v dokumentu = pořadí v data/projects.js.
+  const karty = Array.from(root.querySelectorAll(".card"));
+  if (!karty.length) return;
 
-    // Pokud ve skupině zatím žádný projekt není, blok přeskočíme
-    if (projektySkupiny.length === 0) return;
+  // Seřaď podle pořadí v datech (data-poradi), ať je pořadí v pásmech stejné
+  // v obou pohledech – nezávisle na tom, jak jsou karty seskupené v HTML.
+  karty.sort((a, b) => Number(a.dataset.poradi) - Number(b.dataset.poradi));
 
-    // Blok skupiny s nadpisem
-    const block = document.createElement("div");
-    block.className = "year-block";
-    block.innerHTML = `<h3 class="year-title reveal">${skupina.label}</h3>`;
+  // Odkryj přepínač (bez JS zůstává schovaný).
+  const toggle = document.querySelector(".view-toggle");
+  if (toggle) toggle.hidden = false;
 
-    // Mřížka karet
-    const cards = document.createElement("div");
-    cards.className = "cards";
-    projektySkupiny.forEach((p) => cards.appendChild(vytvorKartu(p)));
+  // Vykreslí daný režim: "studio" (podle semestru) nebo "oblast".
+  function vykresli(rezim) {
+    let pasma;
+    if (rezim === "oblast") {
+      pasma = OBLASTI.map((o) => ({
+        label: o.label,
+        vyber: (k) => k.dataset.oblast === o.key,
+      }));
+    } else {
+      pasma = [
+        { label: "1. semestr", vyber: (k) => k.dataset.semestr === "1" },
+        { label: "2. semestr", vyber: (k) => k.dataset.semestr === "2" },
+      ];
+    }
 
-    block.appendChild(cards);
-    root.appendChild(block);
+    root.innerHTML = "";
+    pasma.forEach((p) => {
+      const vybrane = karty.filter(p.vyber);
+      if (!vybrane.length) return;
+
+      const block = document.createElement("div");
+      block.className = "year-block";
+
+      const nadpis = document.createElement("h3");
+      nadpis.className = "year-title";
+      nadpis.textContent = p.label;
+      block.appendChild(nadpis);
+
+      const grid = document.createElement("div");
+      grid.className = "cards";
+      vybrane.forEach((k) => grid.appendChild(k)); // přesun stejného prvku
+      block.appendChild(grid);
+
+      root.appendChild(block);
+    });
+  }
+
+  // Přepínač: zvýrazni aktivní tlačítko a překresli.
+  const btns = toggle ? Array.from(toggle.querySelectorAll(".view-toggle__btn")) : [];
+  btns.forEach((b) => {
+    b.addEventListener("click", () => {
+      btns.forEach((x) => {
+        const aktivni = x === b;
+        x.classList.toggle("is-active", aktivni);
+        x.setAttribute("aria-pressed", aktivni ? "true" : "false");
+      });
+      vykresli(b.dataset.rezim);
+    });
   });
+
+  vykresli("studio"); // výchozí pohled
 }
 
 /* -------------------------------------------------------------------------
@@ -187,7 +200,7 @@ function spustTema() {
    ------------------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   spustTema();
-  vykresliProjekty();
+  spustProjekty();
   spustAnimace();
   spustParallax();
   spustMagnet();
