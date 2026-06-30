@@ -432,8 +432,7 @@ h1, h2, h3 {
   grid-template-columns: repeat(2, 1fr);
   gap: clamp(2rem, 5vw, 4.5rem);
 }
-/* Každou druhou kartu posuneme dolů → neurovnaný, editorial vzhled */
-.card:nth-child(even) { transform: translateY(3.5rem); }
+/* Sloupce zarovnané – obě karty v řadě začínají na stejné výšce. */
 
 .card__media { overflow: hidden; }
 .card__media img {
@@ -611,10 +610,9 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 }
 a:focus:not(:focus-visible) { outline: none; }
 
-/* karta projektu se po najetí mírně nadzvedne (zachová asymetrický posun sudých) */
+/* karta projektu se po najetí mírně nadzvedne */
 .card { transition: transform 0.25s ease; }
 .card:hover { transform: translateY(-5px); }
-.card:nth-child(even):hover { transform: translateY(calc(3.5rem - 5px)); }
 /* velký e-mail v kontaktu – zvýraznění na hover */
 .contact__email:hover { background: var(--accent); }
 
@@ -627,7 +625,6 @@ a:focus:not(:focus-visible) { outline: none; }
   .hero__image { align-self: auto; order: -1; }   /* na mobilu obrázek nahoru */
   .hero__image img { height: auto; }
   .cards { grid-template-columns: 1fr; }
-  .card:nth-child(even) { transform: none; }       /* zruš posun na mobilu */
   .me__body { margin-left: 0; margin-right: 0; }    /* na mobilu text bez odsazení */
   .me__bar { width: 85%; }                           /* širší pruh na mobilu */
   .me__grid { grid-template-columns: 1fr; }          /* na mobilu jeden sloupec */
