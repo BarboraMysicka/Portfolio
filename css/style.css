@@ -347,8 +347,13 @@ h1, h2, h3 {
   gap: clamp(2rem, 6vw, 5rem);
   align-items: center;
 }
-.approach__quote { margin: 0; }
-/* velká uvozovka jako grafický akcent */
+/* citát jako záměrný designový prvek: žlutá akcentní linka vlevo */
+.approach__quote {
+  margin: 0;
+  border-left: 4px solid var(--accent);
+  padding-left: clamp(1.3rem, 3vw, 2.2rem);
+}
+/* velká uvozovka jako grafický akcent (žlutá) */
 .approach__mark {
   display: block;
   font-family: var(--font-heading);
@@ -356,11 +361,12 @@ h1, h2, h3 {
   font-size: clamp(3.5rem, 7vw, 6rem);
   line-height: 0.5;
   margin-bottom: 0.4rem;
+  color: var(--accent);
 }
 .approach__text {
   font-family: var(--font-body);
   font-size: clamp(1.05rem, 1.7vw, 1.4rem);
-  line-height: 1.55;
+  line-height: 1.75;
   font-weight: 400;
 }
 .approach__text strong { font-weight: 700; }
@@ -370,6 +376,15 @@ h1, h2, h3 {
   font-weight: 600;
   letter-spacing: 0.02em;
   opacity: 0.7;
+}
+/* malý český kontext pod citátem (decentní) */
+.approach__cz {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-style: italic;
+  opacity: 0.55;
+  max-width: 42ch;
 }
 .approach__image img {
   width: 100%;
@@ -732,6 +747,16 @@ a:focus:not(:focus-visible) { outline: none; }
   text-align: center;
 }
 .article__cta { margin: 0.5rem 0 1rem; }
+/* vložené PDF (iframe) v detailové stránce */
+.article__embed {
+  width: 100%;
+  height: 80vh;
+  min-height: 480px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin: 1.8rem 0 0.8rem;
+  background: var(--line);
+}
 
 /* podnadpisy uvnitř delší zprávy (h3 = pododdíl, h4 = malý štítek) */
 .article__body h3 {

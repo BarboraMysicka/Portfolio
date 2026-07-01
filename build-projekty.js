@@ -34,8 +34,9 @@ function escAttr(s) {
 function odkazHtml(odkaz) {
   if (!odkaz) return "";
   const externi = /^https?:/i.test(odkaz) || !/\.html$/i.test(odkaz);
-  const attrs = externi ? ' target="_blank" rel="noopener"' : "";
-  return `      <a class="card__link" href="${escAttr(odkaz)}"${attrs}>Více →</a>\n`;
+  const attrs = externi ? ' target="_blank" rel="noopener noreferrer"' : "";
+  const text = externi ? "Více ↗" : "Více →"; // ↗ = odkaz ven z webu
+  return `      <a class="card__link" href="${escAttr(odkaz)}"${attrs}>${text}</a>\n`;
 }
 
 /* Pořadí v datech si uložíme, ať ho JS umí zachovat i po přeskupení. */
